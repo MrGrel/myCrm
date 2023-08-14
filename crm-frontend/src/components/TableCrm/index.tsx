@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { modalSlice } from '../../store/slice/ModalSlice';
 import { getClients } from '../../store/slice/actionCreatot';
-import { clientCardSlice } from '../../store/slice/clientCardSlice';
 
 import { IClient, TPayloadKeyContact } from '../../types/CrmTypes';
 
