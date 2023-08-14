@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useTypeDispatch, useTypeSelector } from '../../../hooks/redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { modalSlice } from '../../../store/slice/ModalSlice';
-import { getClients } from '../../../store/slice/actionCreatot';
-import { clientCardSlice } from '../../../store/slice/clientCardSlice';
+import { modalSlice } from '../../store/slice/ModalSlice';
+import { getClients } from '../../store/slice/actionCreatot';
+import { clientCardSlice } from '../../store/slice/clientCardSlice';
 
-import { IClient, TPayloadKeyContact } from '../../../types/CrmTypes';
+import { IClient, TPayloadKeyContact } from '../../types/CrmTypes';
 
 import {
   TableList,
@@ -27,12 +27,10 @@ import {
 } from './index.style';
 
 import { arrowBottomSvg, arrowTopSvg, changeSvg, removeClientSvg } from './TableCrmSvg';
-import { TdCrmContacts } from './TdCrmContacts';
-import { TdCrmCreatedAndUpdatedTime } from './TdCrmCreatedAndUpdatedTime';
-import { clientSlice } from '../../../store/slice/ClientsSlice';
-
-import { TableLink } from './index.style';
-import { Loader } from '../../Loader/index.style';
+import { TdCrmContacts } from './TdTableCrm/TdCrmContacts';
+import { TdCrmCreatedAndUpdatedTime } from './TdTableCrm/TdCrmCreatedAndUpdatedTime';
+import { clientSlice } from '../../store/slice/ClientsSlice';
+import { Loader } from '../Loader/index.style';
 
 export const TableCrm = () => {
   const [isFirstRender, setIsFirrstRender] = useState<boolean>(true);
@@ -41,10 +39,8 @@ export const TableCrm = () => {
   const { clietToAscending, clietToDescending, setActivePage } = clientSlice.actions;
   const reload = useTypeSelector((state) => state.modalReducer.isReloadTable);
   const { openModal } = modalSlice.actions;
-  const { putClientCard } = clientCardSlice.actions;
   const dispatch = useTypeDispatch();
 
-  const navigate = useNavigate();
   const { page } = useParams();
 
   const [activeButton, setActiveButton] = useState<TPayloadKeyContact | ''>('');
@@ -60,10 +56,10 @@ export const TableCrm = () => {
     }
   };
 
-  const handleClickButtonMoveToCardPage = (client: IClient) => {
-    dispatch(putClientCard(client));
-    navigate(`client/:${client.id}/`);
-  };
+  // const handleClickButtonMoveToCardPage = (client: IClient) => {
+  //   dispatch(putClientCard(client));
+  //   navigate(`client/${client.id}/`);
+  // };
 
   const handleClickChange = (client: IClient) => {
     dispatch(openModal({ client: client, isSubmiting: false }));
@@ -147,7 +143,7 @@ export const TableCrm = () => {
           clients.map((client) => (
             <TableList key={client.id}>
               <TdItemIDReverse key={'0' + client.id}>
-                <TableLink onClick={(e) => handleClickButtonMoveToCardPage(client)} />
+                <Link to={`client/${client.id}`} />
                 {client.id}
               </TdItemIDReverse>
               <TdItemFIO

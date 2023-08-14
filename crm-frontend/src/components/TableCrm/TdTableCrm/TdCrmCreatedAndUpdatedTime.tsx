@@ -1,5 +1,5 @@
 import { IFunCreatedAndUpdatedTime } from '../../../types/CrmTypes';
-import { TdItemDateTime, TextDMY, TextTime } from './index.style';
+import { TdItemDateTime, TextDMY, TextTime } from '../index.style';
 
 export const TdCrmCreatedAndUpdatedTime = ({ created, updated }: IFunCreatedAndUpdatedTime) => {
   const selectionData = (dateString: string): string => {

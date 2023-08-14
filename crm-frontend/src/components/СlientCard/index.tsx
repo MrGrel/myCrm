@@ -5,7 +5,7 @@ import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
 import { modalSlice } from '../../store/slice/ModalSlice';
 import { getClient } from '../../store/slice/actionCreatot';
 
-import { Title } from '../Container.style';
+import { Title } from '../Container/Container.style';
 import IMG from './img/img';
 import {
   TitleContainer,
@@ -66,8 +66,7 @@ export const Card = () => {
 
   useEffect(() => {
     if (client === null && id) {
-      const param = id.slice(1, id.length);
-      dispatch(getClient(param));
+      dispatch(getClient(id));
     }
   }, []);
 

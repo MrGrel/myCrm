@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ItemLinkPagination, ListLinksPagination } from './index.style';
-import { useTypeSelector } from '../../../hooks/redux';
+import { useTypeSelector } from '../../hooks/redux';
 
 export const Pagination = () => {
   const { allPages, activePage } = useTypeSelector((state) => state.clientReducer);

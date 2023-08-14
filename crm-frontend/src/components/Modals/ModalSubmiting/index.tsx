@@ -4,7 +4,7 @@ import { deleteClient } from '../../../store/slice/actionCreatot';
 
 import { Loader } from '../../Loader/index.style';
 import { ModalCloseBtn, ModalError } from '../Modal/index.style';
-import { closeModalSvg } from '../Modal/ModalSvg';
+import { closeModalSvg } from '../modal.svg';
 import { CancelButton, H3, Modal, ModalContainer, SubmitButton, SubmitText } from './index.style';
 
 export const ModalCrmSubmit = () => {

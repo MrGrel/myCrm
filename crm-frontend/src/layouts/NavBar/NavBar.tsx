@@ -1,12 +1,14 @@
-import { useTypeDispatch } from '../../hooks/redux';
+import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
 import { modalSlice } from '../../store/slice/ModalSlice';
 
-import { Container } from '../../components/Container.style';
+import { Container } from '../../components/Container/Container.style';
 import { FormNav } from '../../components/FormNav';
 import { AddClientButton, FormButtonContainer, Header, HeaderContainer, Logo, LogoText } from './NavBar.style';
 import { Outlet } from 'react-router-dom';
+import { ModalSearch } from '../../components/Modals/ModalSearch';
 
 export const NavBar = () => {
+  const isOpened = useTypeSelector((state) => state.searchClient.isModalSearchOpen);
   const { openModal } = modalSlice.actions;
   const dispatch = useTypeDispatch();
   return (
@@ -26,6 +28,7 @@ export const NavBar = () => {
           </HeaderContainer>
         </Container>
       </Header>
+      {isOpened && <ModalSearch />}
       <Outlet />
     </>
   );

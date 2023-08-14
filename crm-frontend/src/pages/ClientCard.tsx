@@ -4,7 +4,7 @@ import { Card } from '../components/СlientCard';
 import { ModalCrm } from '../components/Modals/Modal';
 import { ModalCrmSubmit } from '../components/Modals/ModalSubmiting';
 
-import { Main, Container } from '../components/Container.style';
+import { Main, Container } from '../components/Container/Container.style';
 
 export const ClientCard = () => {
   const { isOpenModal, isOpenModalSubmit } = useTypeSelector((state) => state.modalReducer);

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import IMAGES from './images/IMAGES';
-import { IOpacityPopup, IColorSortBtn } from '../../../types/CrmTypes';
+import IMAGES from './assets/IMAGES';
+import { IOpacityPopup, IColorSortBtn } from '../../types/CrmTypes';
 
 interface ITableLoadingorError {
   isLoadingOrError: boolean;
@@ -37,38 +37,6 @@ export const TableList = styled.ul`
   list-style: none;
 `;
 
-export const TableLink = styled.button`
-  width: 0;
-  height: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  font-size: 0;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    cursor: pointer;
-  }
-
-  &::before:hover(:not(:focus-visible)) {
-    outline: none;
-  }
-
-  &::before:focus {
-    outline: none;
-  }
-
-  &::before:active(:not(:focus-visible)) {
-    outline: none;
-  }
-`;
-
 export const TdItemID = styled.li`
   align-items: center;
   max-width: 70px;
@@ -97,6 +65,38 @@ export const TdItemIDReverse = styled.li`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  & a {
+    width: 0;
+    height: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    font-size: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 60%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    &::before:hover(:not(:focus-visible)) {
+      outline: none;
+    }
+
+    &::before:focus {
+      outline: none;
+    }
+
+    &::before:active(:not(:focus-visible)) {
+      outline: none;
+    }
+  }
 `;
 
 export const TdItemFIO = styled.li`

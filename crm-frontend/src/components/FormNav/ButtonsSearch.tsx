@@ -1,6 +1,8 @@
+import { searchClientSlice } from '../../store/slice/searchClientSlice';
+import { useTypeDispatch } from '../../hooks/redux';
+
 import { Loader } from '../Loader/index.style';
 import { ButtonsContainer, ButtonSearch, ErrorMessage, LoaderAndErrorContainer } from './index.style';
-
 import { IClient } from '../../types/CrmTypes';
 
 export interface PropsButton {
@@ -10,7 +12,12 @@ export interface PropsButton {
 }
 
 export const ButtonsSearch = ({ clients, isLoading, error }: PropsButton) => {
-  const handleClickOpenClient = (client: IClient) => {};
+  const { openModal } = searchClientSlice.actions;
+  const dispatch = useTypeDispatch();
+
+  const handleClickOpenModalSearch = (client: IClient) => {
+    dispatch(openModal(client));
+  };
 
   return (
     <>
@@ -19,7 +26,7 @@ export const ButtonsSearch = ({ clients, isLoading, error }: PropsButton) => {
           {clients.map((client) => (
             <ButtonSearch
               key={client.id + 'search'}
-              onClick={(e) => handleClickOpenClient(client)}
+              onClick={(e) => handleClickOpenModalSearch(client)}
             >{`${client.surname} ${client.name} ${client.lastName}`}</ButtonSearch>
           ))}
         </ButtonsContainer>

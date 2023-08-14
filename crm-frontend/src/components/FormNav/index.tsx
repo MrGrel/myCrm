@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { searchingClient } from '../../api/apiClients';
 
@@ -6,12 +6,15 @@ import { DarkContainer, Form, Input } from './index.style';
 import { ButtonsSearch } from './ButtonsSearch';
 
 import { IClient } from '../../types/CrmTypes';
+import { useTypeSelector } from '../../hooks/redux';
 
 interface IFrom {
   search: string;
 }
 
 export const FormNav = () => {
+  const client = useTypeSelector((state) => state.searchClient.client);
+
   const [controller, setController] = useState<AbortController>(new AbortController());
   const [clients, setClients] = useState<IClient[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,6 +39,14 @@ export const FormNav = () => {
       setValue('search', '');
     }
   };
+
+  useEffect(() => {
+    if (client === null) {
+      setIsOpenDark(false);
+      setClients([]);
+      setValue('search', '');
+    }
+  }, [client]);
 
   return (
     <>
