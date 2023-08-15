@@ -1,6 +1,6 @@
 import { IClient, IClientState } from '../../types/CrmTypes';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { getClients } from './actionCreatot';
+import { getClients } from './actionCreatotApi';
 
 type TPayloadAction = 'id' | 'surname' | 'createdAt' | 'updatedAt';
 
@@ -9,6 +9,7 @@ const initialState: IClientState = {
   activePage: 0,
   allClients: [],
   clients: [],
+  foundClient: null,
   isLoading: true,
   error: '',
 };
@@ -54,6 +55,14 @@ export const clientSlice = createSlice({
       const end = 5 * state.activePage;
 
       state.clients = state.allClients.slice(start, end);
+    },
+
+    setFoundClient(state, action: PayloadAction<IClient>) {
+      state.foundClient = action.payload;
+    },
+
+    removeFoundClient(state) {
+      state.foundClient = null;
     },
   },
   extraReducers: {

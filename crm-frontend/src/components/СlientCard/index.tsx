@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
 
 import { modalSlice } from '../../store/slice/ModalSlice';
-import { getClient } from '../../store/slice/actionCreatot';
+import { getClient } from '../../store/slice/actionCreatotApi';
 
 import { Title } from '../Container/Container.style';
 import IMG from './img/img';

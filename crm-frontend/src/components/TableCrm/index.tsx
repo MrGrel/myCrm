@@ -3,7 +3,7 @@ import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
 import { Link, useParams } from 'react-router-dom';
 
 import { modalSlice } from '../../store/slice/ModalSlice';
-import { getClients } from '../../store/slice/actionCreatot';
+import { getClients } from '../../store/slice/actionCreatotApi';
 
 import { IClient, TPayloadKeyContact } from '../../types/CrmTypes';
 
@@ -34,8 +34,8 @@ import { Loader } from '../Loader/index.style';
 export const TableCrm = () => {
   const [isFirstRender, setIsFirrstRender] = useState<boolean>(true);
 
-  const { clients, isLoading, error } = useTypeSelector((state) => state.clientReducer);
-  const { clietToAscending, clietToDescending, setActivePage } = clientSlice.actions;
+  const { clients, isLoading, error, foundClient } = useTypeSelector((state) => state.clientReducer);
+  const { clietToAscending, clietToDescending, setActivePage, removeFoundClient } = clientSlice.actions;
   const isReload = useTypeSelector((state) => state.modalReducer.isReloadTable);
   const isRemove = useTypeSelector((state) => state.modalReducer.isRemove);
   const { openModal, removed } = modalSlice.actions;
@@ -55,11 +55,6 @@ export const TableCrm = () => {
       setIsSortingDirection(true);
     }
   };
-
-  // const handleClickButtonMoveToCardPage = (client: IClient) => {
-  //   dispatch(putClientCard(client));
-  //   navigate(`client/${client.id}/`);
-  // };
 
   const handleClickChange = (client: IClient) => {
     dispatch(openModal({ client: client, isSubmiting: false }));
@@ -92,6 +87,14 @@ export const TableCrm = () => {
   }, [page]);
 
   useEffect(() => {
+    if (foundClient !== null) {
+      setTimeout(() => {
+        dispatch(removeFoundClient());
+      }, 1000);
+    }
+  }, [foundClient]);
+
+  useEffect(() => {
     if (clients.length === 0) {
       dispatch(getClients());
     }
@@ -104,7 +107,7 @@ export const TableCrm = () => {
 
   return (
     <>
-      <TableList>
+      <TableList isFound={false}>
         <TdItemID>
           <BtnSort active={activeButton === 'id'} onClick={() => handleClickSort('id')}>
             <TextBtnSort>ID</TextBtnSort>
@@ -146,7 +149,7 @@ export const TableCrm = () => {
           !isLoading &&
           !error &&
           clients.map((client) => (
-            <TableList key={client.id}>
+            <TableList key={client.id} isFound={client.id === foundClient?.id}>
               <TdItemIDReverse key={'0' + client.id}>
                 <Link to={`client/${client.id}`} />
                 {client.id}

@@ -29,7 +29,7 @@ import { IFormValues } from '../../../types/CrmTypes';
 import { useEffect } from 'react';
 import { useTypeDispatch, useTypeSelector } from '../../../hooks/redux';
 import { addNewContactSvg, closeModalSvg, removeContactSvg } from '../modal.svg';
-import { patchClient, postClient } from '../../../store/slice/actionCreatot';
+import { patchClient, postClient } from '../../../store/slice/actionCreatotApi';
 import { modalSlice } from '../../../store/slice/ModalSlice';
 import { Loader } from '../../Loader/index.style';
 

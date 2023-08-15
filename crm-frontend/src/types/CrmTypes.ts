@@ -24,6 +24,7 @@ export interface IClientState {
   activePage: number;
   allClients: IClient[];
   clients: IClient[];
+  foundClient: IClient | null;
   isLoading: boolean;
   error: string;
 }

@@ -1,6 +1,6 @@
 import { useTypeDispatch, useTypeSelector } from '../../../hooks/redux';
 import { modalSlice } from '../../../store/slice/ModalSlice';
-import { deleteClient } from '../../../store/slice/actionCreatot';
+import { deleteClient } from '../../../store/slice/actionCreatotApi';
 
 import { Loader } from '../../Loader/index.style';
 import { ModalCloseBtn, ModalError } from '../Modal/index.style';

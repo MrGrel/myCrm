@@ -6,6 +6,10 @@ interface ITableLoadingorError {
   isLoadingOrError: boolean;
 }
 
+interface IListFound {
+  isFound: boolean;
+}
+
 export const TableContainer = styled.div<ITableLoadingorError>`
   display: ${(props) => (props.isLoadingOrError ? 'flex' : 'block')};
   width: 100%;
@@ -26,15 +30,17 @@ export const TableError = styled.p`
   color: red;
 `;
 
-export const TableList = styled.ul`
+export const TableList = styled.ul<IListFound>`
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
   margin: 0;
   padding: 10px 20px;
+  background: ${(props) => (props.isFound ? 'rgba(152, 115, 255, .2)' : 'none')};
   border-bottom: 1px solid #c8c5d1;
   list-style: none;
+  transition: all 0.3s ease-in-out;
 `;
 
 export const TdItemID = styled.li`

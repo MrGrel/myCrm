@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useTypeDispatch, useTypeSelector } from '../../../hooks/redux';
 import { searchClientSlice } from '../../../store/slice/searchClientSlice';
+import { clientSlice } from '../../../store/slice/ClientsSlice';
 
 import { LinksContainer, Modal, ModalCancel, ModalClose, ModalContainer, ModalText } from './index.style';
 import { closeModalSvg } from '../modal.svg';
@@ -13,14 +14,19 @@ export const ModalSearch = () => {
   const allClients = useTypeSelector((state) => state.clientReducer.allClients);
   const client = useTypeSelector((state) => state.searchClient.client);
   const { closeModal, clearSearch } = searchClientSlice.actions;
+  const { setFoundClient } = clientSlice.actions;
   const dispatch = useTypeDispatch();
 
   const handleClickClose = () => {
     dispatch(closeModal());
   };
 
-  const handleClickClearSearchLink = () => {
+  const handleClickClearSearchLink = (isOpenTable: boolean) => {
     dispatch(clearSearch());
+
+    if (isOpenTable && client) {
+      dispatch(setFoundClient(client));
+    }
   };
 
   useEffect(() => {
@@ -41,10 +47,10 @@ export const ModalSearch = () => {
         <ModalClose onClick={(e) => handleClickClose()}>{closeModalSvg}</ModalClose>
         <ModalText>Пожалуйста, выберите где показать клииента,в таблице или в карточке клиента</ModalText>
         <LinksContainer>
-          <Link to={`/crm/${page}`} onClick={handleClickClearSearchLink}>
+          <Link to={`/crm/${page}`} onClick={(e) => handleClickClearSearchLink(true)}>
             в таблице
           </Link>
-          <Link to={`/crm/${page}/client/${client?.id}`} onClick={handleClickClearSearchLink}>
+          <Link to={`/crm/${page}/client/${client?.id}`} onClick={(e) => handleClickClearSearchLink(false)}>
             в вкладке
           </Link>
         </LinksContainer>

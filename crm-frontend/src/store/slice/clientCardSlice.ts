@@ -1,6 +1,6 @@
 import { IClient } from '../../types/CrmTypes';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { getClient } from './actionCreatot';
+import { getClient } from './actionCreatotApi';
 
 export interface IClientCard {
   client: IClient | null;
