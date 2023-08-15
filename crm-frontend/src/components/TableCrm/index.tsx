@@ -36,8 +36,9 @@ export const TableCrm = () => {
 
   const { clients, isLoading, error } = useTypeSelector((state) => state.clientReducer);
   const { clietToAscending, clietToDescending, setActivePage } = clientSlice.actions;
-  const reload = useTypeSelector((state) => state.modalReducer.isReloadTable);
-  const { openModal } = modalSlice.actions;
+  const isReload = useTypeSelector((state) => state.modalReducer.isReloadTable);
+  const isRemove = useTypeSelector((state) => state.modalReducer.isRemove);
+  const { openModal, removed } = modalSlice.actions;
   const dispatch = useTypeDispatch();
 
   const { page } = useParams();
@@ -74,7 +75,7 @@ export const TableCrm = () => {
     } else {
       setIsFirrstRender(false);
     }
-  }, [reload]);
+  }, [isReload]);
 
   useEffect(() => {
     if (activeButton !== '') {
@@ -87,14 +88,19 @@ export const TableCrm = () => {
   }, [activeButton, isSortingDirection]);
 
   useEffect(() => {
+    dispatch(setActivePage(Number(page)));
+  }, [page]);
+
+  useEffect(() => {
     if (clients.length === 0) {
       dispatch(getClients());
     }
-  }, []);
 
-  useEffect(() => {
-    dispatch(setActivePage(Number(page)));
-  }, [page]);
+    if (isRemove) {
+      dispatch(getClients());
+      dispatch(removed());
+    }
+  }, []);
 
   return (
     <>

@@ -54,7 +54,6 @@ export const Card = () => {
     if (!isFirstRender) {
       if (isRemove) {
         dispatch(removeClientCard());
-        dispatch(removed());
         navigate(-1);
       } else if (client) {
         dispatch(getClient(client.id));

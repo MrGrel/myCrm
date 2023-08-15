@@ -1,22 +1,29 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { useTypeDispatch, useTypeSelector } from '../../../hooks/redux';
 import { searchClientSlice } from '../../../store/slice/searchClientSlice';
-import { closeModalSvg } from '../modal.svg';
+
 import { LinksContainer, Modal, ModalCancel, ModalClose, ModalContainer, ModalText } from './index.style';
+import { closeModalSvg } from '../modal.svg';
 
 export const ModalSearch = () => {
+  const [page, setPage] = useState<number>(1);
+
   const allClients = useTypeSelector((state) => state.clientReducer.allClients);
   const client = useTypeSelector((state) => state.searchClient.client);
   const { closeModal, clearSearch } = searchClientSlice.actions;
   const dispatch = useTypeDispatch();
 
-  const navigate = useNavigate();
-
   const handleClickClose = () => {
     dispatch(closeModal());
   };
 
-  const handleClickClearSearchButton = () => {
+  const handleClickClearSearchLink = () => {
+    dispatch(clearSearch());
+  };
+
+  useEffect(() => {
     let page = 1;
 
     allClients.forEach((clientInArr, index) => {
@@ -25,27 +32,19 @@ export const ModalSearch = () => {
       }
     });
 
-    navigate(`/crm/${page}`);
-    dispatch(clearSearch());
-  };
-
-  const handleClickClearSearchLink = () => {
-    dispatch(clearSearch());
-  };
+    setPage(page);
+  }, []);
 
   return (
     <ModalContainer>
       <Modal>
         <ModalClose onClick={(e) => handleClickClose()}>{closeModalSvg}</ModalClose>
-        <ModalText>Пожалуйста, выберите где показать клииента,в таблице или в новой вкладке</ModalText>
+        <ModalText>Пожалуйста, выберите где показать клииента,в таблице или в карточке клиента</ModalText>
         <LinksContainer>
-          <button onClick={handleClickClearSearchButton}>в таблице</button>
-          <Link
-            to={`/crm/1/client/:${client?.id}`}
-            target="_blank"
-            rel="noopener norefener"
-            onClick={handleClickClearSearchLink}
-          >
+          <Link to={`/crm/${page}`} onClick={handleClickClearSearchLink}>
+            в таблице
+          </Link>
+          <Link to={`/crm/${page}/client/${client?.id}`} onClick={handleClickClearSearchLink}>
             в вкладке
           </Link>
         </LinksContainer>
