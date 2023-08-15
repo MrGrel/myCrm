@@ -1,7 +1,7 @@
 import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
-import { modalSlice } from '../../store/slice/ModalSlice';
+import { modalSlice } from '../../store/slice/modal.slice';
 
-import { Container } from '../../components/Container/Container.style';
+import { Container } from '../../components/Container/сontainer.style';
 import { FormNav } from '../../components/FormNav';
 import { AddClientButton, FormButtonContainer, Header, HeaderContainer, Logo, LogoText } from './NavBar.style';
 import { Outlet } from 'react-router-dom';

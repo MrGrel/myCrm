@@ -28,9 +28,9 @@ import {
 import { IFormValues } from '../../../types/CrmTypes';
 import { useEffect } from 'react';
 import { useTypeDispatch, useTypeSelector } from '../../../hooks/redux';
-import { addNewContactSvg, closeModalSvg, removeContactSvg } from '../modal.svg';
-import { patchClient, postClient } from '../../../store/slice/actionCreatotApi';
-import { modalSlice } from '../../../store/slice/ModalSlice';
+import { addNewContactSvg, closeModalSvg, removeContactSvg } from '../modal-svg';
+import { patchClient, postClient } from '../../../store/slice/actionCreatot.api';
+import { modalSlice } from '../../../store/slice/modal.slice';
 import { Loader } from '../../Loader/index.style';
 
 export const ModalCrm = () => {
@@ -171,12 +171,15 @@ export const ModalCrm = () => {
           <ModalContactsFieldset>
             <ModalContainerContactInputs>
               {fields.map((field, index) => {
+                const isOneOfSocialMedia =
+                  field.type === 'Телефон' ||
+                  field.type === 'Vk' ||
+                  field.type === 'Email' ||
+                  field.type === 'Facebook';
+
                 return (
                   <ModalLabelContact key={field.id} alert={errors?.contacts?.length === index + 1}>
-                    {field.type === 'Телефон' ||
-                    field.type === 'Vk' ||
-                    field.type === 'Email' ||
-                    field.type === 'Facebook' ? (
+                    {isOneOfSocialMedia ? (
                       <ModalSelect
                         {...register(`contacts.${index}.type`, {
                           onChange: (e) => {

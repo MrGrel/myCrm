@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import clientCardReducer from './slice/clientCardSlice';
-import searchClient from './slice/searchClientSlice';
-import clientReducer from './slice/ClientsSlice';
-import modalReducer from './slice/ModalSlice';
+import clientCardReducer from './slice/clientCard.slice';
+import searchClient from './slice/searchClient.slice';
+import clientReducer from './slice/clients.slice';
+import modalReducer from './slice/modal.slice';
 
 const rootReducer = combineReducers({
   clientCardReducer,

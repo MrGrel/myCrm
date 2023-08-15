@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useTypeDispatch, useTypeSelector } from '../../../hooks/redux';
-import { searchClientSlice } from '../../../store/slice/searchClientSlice';
-import { clientSlice } from '../../../store/slice/ClientsSlice';
+import { searchClientSlice } from '../../../store/slice/searchClient.slice';
+import { clientSlice } from '../../../store/slice/clients.slice';
 
 import { LinksContainer, Modal, ModalCancel, ModalClose, ModalContainer, ModalText } from './index.style';
-import { closeModalSvg } from '../modal.svg';
+import { closeModalSvg } from '../modal-svg';
 
 export const ModalSearch = () => {
   const [page, setPage] = useState<number>(1);

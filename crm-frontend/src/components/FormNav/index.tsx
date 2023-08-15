@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { searchingClient } from '../../api/apiClients';
 
 import { DarkContainer, Form, Input } from './index.style';
-import { ButtonsSearch } from './ButtonsSearch';
+import { ButtonsSearch } from './buttonsSearch';
 
 import { IClient } from '../../types/CrmTypes';
 import { useTypeSelector } from '../../hooks/redux';
@@ -63,32 +63,33 @@ export const FormNav = () => {
               const newController = new AbortController();
               const signal = newController.signal;
 
-              if (value) {
-                setIsLoading(true);
-
-                searchingClient(value, signal)
-                  .then((data) => {
-                    if (data) {
-                      if (data.length === 0) {
-                        throw new Error('Клиенты не найдены');
-                      }
-                      setClients(data);
-                    } else {
-                    }
-                  })
-                  .catch((error) => {
-                    if (error?.message && error?.message !== 'The user aborted a request.') {
-                      setError(error.message);
-                    }
-                  })
-                  .finally(() => {
-                    setIsLoading(false);
-                  });
-
-                setController(newController);
-              } else {
+              if (!value) {
                 setClients([]);
+                return;
               }
+
+              setIsLoading(true);
+
+              searchingClient(value, signal)
+                .then((data) => {
+                  if (data) {
+                    if (data.length === 0) {
+                      throw new Error('Клиенты не найдены');
+                    }
+                    setClients(data);
+                  } else {
+                  }
+                })
+                .catch((error) => {
+                  if (error?.message && error?.message !== 'The user aborted a request.') {
+                    setError(error.message);
+                  }
+                })
+                .finally(() => {
+                  setIsLoading(false);
+                });
+
+              setController(newController);
             },
           })}
           onClick={handleClickInput}

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IModalState, IOpenModalPayLoad } from '../../types/CrmTypes';
-import { postClient, patchClient, deleteClient } from './actionCreatotApi';
+import { postClient, patchClient, deleteClient } from './actionCreatot.api';
 
 const initialState: IModalState = {
   client: null,

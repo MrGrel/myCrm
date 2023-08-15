@@ -1,6 +1,6 @@
 import { IClient, IClientState } from '../../types/CrmTypes';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { getClients } from './actionCreatotApi';
+import { getClients } from './actionCreatot.api';
 
 type TPayloadAction = 'id' | 'surname' | 'createdAt' | 'updatedAt';
 
@@ -19,13 +19,7 @@ export const clientSlice = createSlice({
   initialState,
   reducers: {
     clietToAscending(state, action: PayloadAction<TPayloadAction>) {
-      state.allClients = state.clients.sort((a, b) => {
-        if (a[action.payload] > b[action.payload]) {
-          return -1;
-        } else {
-          return 1;
-        }
-      });
+      state.allClients = state.clients.sort((a, b) => (a[action.payload] > b[action.payload] ? -1 : 1));
 
       const start = 5 * (state.activePage - 1);
       const end = 5 * state.activePage;
@@ -34,13 +28,7 @@ export const clientSlice = createSlice({
     },
 
     clietToDescending(state, action: PayloadAction<TPayloadAction>) {
-      state.allClients = state.clients.sort((a, b) => {
-        if (a[action.payload] > b[action.payload]) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
+      state.allClients = state.clients.sort((a, b) => (a[action.payload] > b[action.payload] ? 1 : -1));
 
       const start = 5 * (state.activePage - 1);
       const end = 5 * state.activePage;

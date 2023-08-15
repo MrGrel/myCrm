@@ -1,13 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import {
-  gettingClients,
-  gettingClient,
-  postingClient,
-  patchingClient,
-  deletingClient,
-  searchingClient,
-} from '../../api/apiClients';
-import { IFetchData, ISearchClient } from '../../types/CrmTypes';
+import { gettingClients, gettingClient, postingClient, patchingClient, deletingClient } from '../../api/apiClients';
+import { IFetchData } from '../../types/CrmTypes';
 
 export const getClients = createAsyncThunk('client/getClients', async (_, thunkApi) => {
   try {

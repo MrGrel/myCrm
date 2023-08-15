@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
 import { Link, useParams } from 'react-router-dom';
 
-import { modalSlice } from '../../store/slice/ModalSlice';
-import { getClients } from '../../store/slice/actionCreatotApi';
+import { modalSlice } from '../../store/slice/modal.slice';
+import { getClients } from '../../store/slice/actionCreatot.api';
 
 import { IClient, TPayloadKeyContact } from '../../types/CrmTypes';
 
@@ -25,10 +25,10 @@ import {
   TdItemIDReverse,
 } from './index.style';
 
-import { arrowBottomSvg, arrowTopSvg, changeSvg, removeClientSvg } from './TableCrmSvg';
+import { arrowBottomSvg, arrowTopSvg, changeSvg, removeClientSvg } from './tableCrm-svg';
 import { TdCrmContacts } from './TdTableCrm/TdCrmContacts';
 import { TdCrmCreatedAndUpdatedTime } from './TdTableCrm/TdCrmCreatedAndUpdatedTime';
-import { clientSlice } from '../../store/slice/ClientsSlice';
+import { clientSlice } from '../../store/slice/clients.slice';
 import { Loader } from '../Loader/index.style';
 
 export const TableCrm = () => {

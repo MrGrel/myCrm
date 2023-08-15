@@ -8,7 +8,7 @@ import {
   TdItemContact,
   ConatactButtonMore,
 } from '../index.style';
-import { phoneSvg, mailSvg, facebookSvg, vkSvg, otherContactSvg } from '../TableCrmSvg';
+import { phoneSvg, mailSvg, facebookSvg, vkSvg, otherContactSvg } from '../tableCrm-svg';
 
 export const TdCrmContacts = ({ contacts }: IFunContact) => {
   const [isActiveContact, setIsActiveContact] = useState<boolean>(false);

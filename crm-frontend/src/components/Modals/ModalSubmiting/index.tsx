@@ -1,10 +1,10 @@
 import { useTypeDispatch, useTypeSelector } from '../../../hooks/redux';
-import { modalSlice } from '../../../store/slice/ModalSlice';
-import { deleteClient } from '../../../store/slice/actionCreatotApi';
+import { modalSlice } from '../../../store/slice/modal.slice';
+import { deleteClient } from '../../../store/slice/actionCreatot.api';
 
 import { Loader } from '../../Loader/index.style';
 import { ModalCloseBtn, ModalError } from '../Modal/index.style';
-import { closeModalSvg } from '../modal.svg';
+import { closeModalSvg } from '../modal-svg';
 import { CancelButton, H3, Modal, ModalContainer, SubmitButton, SubmitText } from './index.style';
 
 export const ModalCrmSubmit = () => {

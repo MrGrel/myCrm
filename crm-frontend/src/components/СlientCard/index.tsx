@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
 
-import { modalSlice } from '../../store/slice/ModalSlice';
-import { getClient } from '../../store/slice/actionCreatotApi';
+import { modalSlice } from '../../store/slice/modal.slice';
+import { getClient } from '../../store/slice/actionCreatot.api';
 
-import { Title } from '../Container/Container.style';
-import IMG from './img/img';
+import { Title } from '../Container/сontainer.style';
+import IMG from './assets/img';
 import {
   TitleContainer,
   ButtonBack,
@@ -23,7 +23,7 @@ import {
   ContactDesc,
   LoaderContainer,
 } from './index.style';
-import { clientCardSlice } from '../../store/slice/clientCardSlice';
+import { clientCardSlice } from '../../store/slice/clientCard.slice';
 import { Loader } from '../Loader/index.style';
 
 export const Card = () => {
@@ -32,7 +32,7 @@ export const Card = () => {
   const { client, error, isLoading } = useTypeSelector((state) => state.clientCardReducer);
   const { isRemove, isReloadTable } = useTypeSelector((state) => state.modalReducer);
   const { removeClientCard } = clientCardSlice.actions;
-  const { openModal, removed } = modalSlice.actions;
+  const { openModal } = modalSlice.actions;
   const dispatch = useTypeDispatch();
 
   const navigate = useNavigate();
@@ -52,14 +52,17 @@ export const Card = () => {
 
   useEffect(() => {
     if (!isFirstRender) {
-      if (isRemove) {
-        dispatch(removeClientCard());
-        navigate(-1);
-      } else if (client) {
-        dispatch(getClient(client.id));
-      }
-    } else {
       setIsFirstRender(false);
+      return;
+    }
+
+    if (isRemove) {
+      dispatch(removeClientCard());
+      navigate(-1);
+    }
+
+    if (client) {
+      dispatch(getClient(client.id));
     }
   }, [isReloadTable]);
 

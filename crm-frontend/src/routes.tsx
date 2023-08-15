@@ -1,6 +1,6 @@
 import { Navigate, useRoutes } from 'react-router-dom';
-import { Crm } from './pages/Crm';
-import { ClientCard } from './pages/ClientCard';
+import { Crm } from './pages/crm';
+import { ClientCard } from './pages/clientCard';
 import { NavBar } from './layouts/NavBar/NavBar';
 
 export const Router = () => {

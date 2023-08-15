@@ -1,4 +1,4 @@
-import { searchClientSlice } from '../../store/slice/searchClientSlice';
+import { searchClientSlice } from '../../store/slice/searchClient.slice';
 import { useTypeDispatch } from '../../hooks/redux';
 
 import { Loader } from '../Loader/index.style';
