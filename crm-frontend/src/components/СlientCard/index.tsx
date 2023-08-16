@@ -5,7 +5,7 @@ import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
 import { modalSlice } from '../../store/slice/modal.slice';
 import { getClient } from '../../store/slice/actionCreatot.api';
 
-import { Title } from '../Container/сontainer.style';
+import { Title } from '../Container/index.style';
 import IMG from './assets/img';
 import {
   TitleContainer,

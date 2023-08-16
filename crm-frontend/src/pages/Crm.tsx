@@ -1,4 +1,4 @@
-import { Container, Main, Title } from '../components/Container/сontainer.style';
+import { Container, Main, Title } from '../components/Container/index.style';
 import { ModalCrm } from '../components/Modals/Modal';
 import { ModalCrmSubmit } from '../components/Modals/ModalSubmiting';
 import { TableCrm } from '../components/TableCrm';

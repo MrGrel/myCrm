@@ -1,9 +1,9 @@
 import { useTypeDispatch, useTypeSelector } from '../../hooks/redux';
 import { modalSlice } from '../../store/slice/modal.slice';
 
-import { Container } from '../../components/Container/сontainer.style';
+import { Container } from '../../components/Container/index.style';
 import { FormNav } from '../../components/FormNav';
-import { AddClientButton, FormButtonContainer, Header, HeaderContainer, Logo, LogoText } from './NavBar.style';
+import { AddClientButton, FormButtonContainer, Header, HeaderContainer, Logo, LogoText } from './index.style';
 import { Outlet } from 'react-router-dom';
 import { ModalSearch } from '../../components/Modals/ModalSearch';
 
