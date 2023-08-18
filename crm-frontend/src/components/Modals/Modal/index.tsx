@@ -227,6 +227,11 @@ export const ModalCrm = () => {
                               return value.match(/^\+([0-9]){10}/) !== null || 'Номер должен состоять только из цифр';
                             }
                           },
+                          email: (value) => {
+                            if (field.type === 'Email') {
+                              return value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/) !== null || 'Неправильный email';
+                            }
+                          },
                         },
                         onChange: (e) => {
                           field.value = e.target.value;
