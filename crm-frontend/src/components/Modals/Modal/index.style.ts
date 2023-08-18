@@ -47,6 +47,19 @@ export const ModalError = styled.p`
   color: red;
 `;
 
+export const ModalErrorContacts = styled.p`
+  position: absolute;
+  bottom: -13px;
+  left: 0;
+  margin: 0;
+  margin-top: 10px;
+  padding: 0;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: red;
+`;
+
 export const ModalTitleContainer = styled.div`
   display: flex;
   align-items: flex-end;
@@ -161,6 +174,7 @@ export const ModalContainerContactInputs = styled.div`
 `;
 
 export const ModalLabelContact = styled.label<IStyleAlert>`
+  position: relative;
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
@@ -289,6 +303,7 @@ export const ModalAddContact = styled.button`
   color: #333333;
   fill: #9873ff;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 
   & svg {
     margin-right: 0.5em;

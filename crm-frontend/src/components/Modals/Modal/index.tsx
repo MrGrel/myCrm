@@ -23,6 +23,7 @@ import {
   ModalContactTypeInput,
   ModalError,
   ModalCloseBtn,
+  ModalErrorContacts,
 } from './index.style';
 
 import { IFormValues } from '../../../types/CrmTypes';
@@ -46,6 +47,7 @@ export const ModalCrm = () => {
     control,
     watch,
   } = useForm<IFormValues>({
+    mode: 'onBlur',
     defaultValues: {
       name: '',
       surname: '',
@@ -58,7 +60,6 @@ export const ModalCrm = () => {
     control,
   });
 
-  // Функция вызвана исключительно для перерисовки
   watch();
 
   const onSubmit = (data: IFormValues) => {
@@ -178,7 +179,10 @@ export const ModalCrm = () => {
                   field.type === 'Facebook';
 
                 return (
-                  <ModalLabelContact key={field.id} alert={errors?.contacts?.length === index + 1}>
+                  <ModalLabelContact
+                    key={field.id}
+                    alert={errors?.contacts !== undefined && errors?.contacts[index] !== undefined}
+                  >
                     {isOneOfSocialMedia ? (
                       <ModalSelect
                         {...register(`contacts.${index}.type`, {
@@ -206,14 +210,21 @@ export const ModalCrm = () => {
                       type={field.type === 'Телефон' ? 'tel' : 'text'}
                       value={field.value}
                       {...register(`contacts.${index}.value`, {
-                        required: true,
+                        required: 'Это поле обязательно для заполнения',
                         validate: {
-                          phone: (value) => {
+                          phoneBegining: (value) => {
                             if (field.type === 'Телефон') {
-                              return (
-                                (value.length === 12 && value.match(/^\+7([0-9]){10}/) !== null) ||
-                                'Номер должен начинаться с +7 и использованы должны быть только цифры'
-                              );
+                              return value.match(/^\+7/) !== null || 'Номер должен начинаться с +7';
+                            }
+                          },
+                          phoneLength: (value) => {
+                            if (field.type === 'Телефон') {
+                              return value.length === 12 || 'Номер должен содержать 12 символов включая "+"';
+                            }
+                          },
+                          phoneNumberValidity: (value) => {
+                            if (field.type === 'Телефон') {
+                              return value.match(/^\+([0-9]){10}/) !== null || 'Номер должен состоять только из цифр';
                             }
                           },
                         },
@@ -238,6 +249,9 @@ export const ModalCrm = () => {
                       >
                         {removeContactSvg}
                       </ModalCLoseContact>
+                    )}
+                    {errors?.contacts && errors?.contacts[index] && (
+                      <ModalErrorContacts>{errors?.contacts[index]?.value?.message}</ModalErrorContacts>
                     )}
                   </ModalLabelContact>
                 );
