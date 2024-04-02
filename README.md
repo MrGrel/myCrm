@@ -1,8 +1,5 @@
-## Зайдите в папку crm-backend, для запуска сервера выполните команду #
-### `node index`.
-Для остановки нажмите сочетание клавиш CTRL+C.`
-После запуска сервера API будет доступен по пути `http://localhost:5000`.
+# MyCrm
 
-## Зайдите в папку crm-frontend, выполните команды 
-### `npm install`
-### `npm start`
+## Installation and launch
+
+`docker-compose up -d`
