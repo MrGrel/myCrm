@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  frontend:
+    build:
+      context: ./crm-frontend
+      dockerfile: Dockerfile
+    container_name: crm-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: ./crm-backend
+      dockerfile: Dockerfile
+    container_name: crm-backend
+    ports:
+      - "5000:5000"
