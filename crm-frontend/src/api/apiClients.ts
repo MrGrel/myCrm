@@ -1,7 +1,7 @@
 import { IClient, IFetchData } from '../types/CrmTypes';
 
 export const gettingClients = async (): Promise<IClient[]> => {
-  return await fetch('http://localhost:5000/api/clients').then((response) => {
+  return await fetch(`${process.env.REACT_APP_API}/clients`).then((response) => {
     if (response.status === 404) {
       throw new Error('Клиенты не найдены');
     } else if (response.status >= 500) {
@@ -12,7 +12,7 @@ export const gettingClients = async (): Promise<IClient[]> => {
 };
 
 export const gettingClient = async (id: string): Promise<IClient[]> => {
-  return await fetch(`http://localhost:5000/api/clients/${id}`).then((response) => {
+  return await fetch(`${process.env.REACT_APP_API}/clients/${id}`).then((response) => {
     if (response.status === 404) {
       throw new Error('Клиенты не найдены');
     } else if (response.status >= 500) {
@@ -23,7 +23,7 @@ export const gettingClient = async (id: string): Promise<IClient[]> => {
 };
 
 export const postingClient = async (data: IFetchData): Promise<void> => {
-  return await fetch(`http://localhost:5000/api/clients`, {
+  return await fetch(`${process.env.REACT_APP_API}/clients`, {
     method: 'POST',
     body: JSON.stringify(data.client),
     headers: { 'Content-Type': 'application/json' },
@@ -37,7 +37,7 @@ export const postingClient = async (data: IFetchData): Promise<void> => {
 };
 
 export const patchingClient = async (data: IFetchData): Promise<void> => {
-  return await fetch(`http://localhost:5000/api/clients/${data.id}`, {
+  return await fetch(`${process.env.REACT_APP_API}/clients/${data.id}`, {
     method: 'PATCH',
     body: JSON.stringify(data.client),
     headers: { 'Content-Type': 'application/json' },
@@ -51,7 +51,7 @@ export const patchingClient = async (data: IFetchData): Promise<void> => {
 };
 
 export const deletingClient = async (id: string): Promise<void> => {
-  return await fetch(`http://localhost:5000/api/clients/${id}`, {
+  return await fetch(`${process.env.REACT_APP_API}/clients/${id}`, {
     method: 'DELETE',
   }).then((response) => {
     if (response.status === 404) {
@@ -63,7 +63,7 @@ export const deletingClient = async (id: string): Promise<void> => {
 };
 
 export const searchingClient = async (value: string, signal: AbortSignal): Promise<void | IClient[]> => {
-  return await fetch(`http://localhost:5000/api/clients?search=${value}`, {
+  return await fetch(`${process.env.REACT_APP_API}/clients?search=${value}`, {
     method: 'GET',
     signal: signal,
   }).then((response) => {
